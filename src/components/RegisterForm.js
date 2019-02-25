@@ -17,7 +17,9 @@ class RegisterForm extends Component {
         </Grid>
         <Modal
           size={"tiny"}
-          trigger={<Button content="Sign up" inverted color='green' icon="signup" />}
+          trigger={
+            <Button content="Sign up" inverted color="green" icon="signup" />
+          }
           closeIcon={true}
         >
           <Modal.Header>Create a new account</Modal.Header>
@@ -26,8 +28,14 @@ class RegisterForm extends Component {
               <Form.Input
                 icon="user"
                 iconPosition="left"
-                label="Username"
-                placeholder="Username"
+                label="Fullname"
+                placeholder="Fullname"
+              />
+              <Form.Input
+                icon="user"
+                iconPosition="left"
+                label="Email"
+                placeholder="Email"
               />
               <Form.Input
                 icon="lock"
