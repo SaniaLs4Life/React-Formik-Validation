@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Loader, Message, Header } from "semantic-ui-react";
+import { Button, Form, Loader, Message } from "semantic-ui-react";
 
 import * as Yup from "yup";
 import { withFormik } from "formik";
@@ -10,7 +10,8 @@ const LoginForm = ({
   handleChange,
   handleSubmit,
   errors,
-  isSubmitting
+  isSubmitting,
+  handleBlur
 }) => (
   <Form>
     <Loader size="medium" active={isSubmitting}>
@@ -24,9 +25,11 @@ const LoginForm = ({
         label={errors.email}
         iconPosition="left"
         placeholder="Email"
+        value={email}
         error={!!errors.email}
         disabled={isSubmitting}
         onChange={handleChange("email")}
+        onBlur={handleBlur}
       />
     </Form.Field>
     <Form.Field>
@@ -36,16 +39,18 @@ const LoginForm = ({
         iconPosition="left"
         type="password"
         label={errors.password}
+        value={password}
         placeholder="Password"
         error={!!errors.password}
         disabled={isSubmitting}
         onChange={handleChange("password")}
+        onBlur={handleBlur}
       />
     </Form.Field>
     <Button
       type="submit"
       content="Sign in"
-      onClick={handleSubmit}
+      onClick={e => handleSubmit(e)}
       icon="sign-in"
       primary
       disabled={!!errors.email || !!errors.password || isSubmitting}
@@ -64,21 +69,14 @@ const LoginForm = ({
 export default withFormik({
   mapPropsToValues({ email, password }) {
     return {
-      email: email || "",
-      password: password || ""
+      email: "",
+      password: ""
     };
   },
-  handleSubmit(
-    { email, password },
-    { setSubmitting, resetForm, setStatus, setError }
-  ) {
+  handleSubmit(values, { setSubmitting }) {
     setTimeout(() => {
-      if (email === "hakan@gmail.com") {
-        setStatus({ email: "This email is already exists!", password: "ASD" });
-        setSubmitting(false);
-      } else {
-        resetForm();
-      }
+      setSubmitting(false);
+      console.log(values)
     }, 2000);
   },
   validationSchema: Yup.object().shape({
