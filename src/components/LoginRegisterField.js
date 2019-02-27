@@ -21,7 +21,7 @@ class LoginRegisterField extends Component {
           </Header>
         </Header>
         <Segment placeholder>
-          <Grid columns={2} stackable textAlign="center">
+          <Grid columns={2} textAlign="center">
             <Grid.Row verticalAlign="middle">
               <Grid.Column>
                 <LoginForm />
